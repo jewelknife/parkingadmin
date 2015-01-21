@@ -51,10 +51,10 @@ PurequestContexthase: http://themeforest.net/item/metronic-responsive-admin-dash
 <div class="content">
     <!-- BEGIN LOGIN FORM -->
     <form class="login-form"  method="post">
-        <h3 class="form-title">Login to your account</h3>
+        <h3 class="form-title">请登录</h3>
         <div class="alert alert-danger display-hide">
             <button class="close" data-close="alert"></button>
-            <span>Enter any username and password.</span>
+            <span>请输入用户名和密码.</span>
         </div>
         <#if errorMsg?? >
         <div class="alert alert-danger">
@@ -64,133 +64,34 @@ PurequestContexthase: http://themeforest.net/item/metronic-responsive-admin-dash
         </#if>
         <div class="form-group">
             <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
-            <label class="control-label visible-ie8 visible-ie9">Username</label>
+            <label class="control-label visible-ie8 visible-ie9">用户名</label>
             <div class="input-icon">
                 <i class="fa fa-user"></i>
-                <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Username" name="username"/>
+                <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="用户名" name="username"/>
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label visible-ie8 visible-ie9">Password</label>
+            <label class="control-label visible-ie8 visible-ie9">密码</label>
             <div class="input-icon">
                 <i class="fa fa-lock"></i>
-                <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="Password" name="password"/>
+                <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="密码" name="password"/>
             </div>
         </div>
         <div class="form-actions">
-            <label class="checkbox">
-                <input type="checkbox" name="remember" value="1"/> Remember me
+            <label class="checkbox pull-left">
+                <input type="checkbox" name="remember" value="1"/> 记住我
             </label>
             <button type="submit" class="btn blue pull-right">
-                Login <i class="m-icon-swapright m-icon-white"></i>
+                登陆 <i class="m-icon-swapright m-icon-white"></i>
             </button>
-        </div>
-        <div class="forget-password">
-            <h4>Forgot your password ?</h4>
-            <p>
-                no worries, click <a href="javascript:;"  id="forget-password">here</a>
-                to reset your password.
-            </p>
-        </div>
-        <div class="create-account">
-            <p>
-                Don't have an account yet ?&nbsp;
-                <a href="javascript:;" id="register-btn" >Create an account</a>
-            </p>
         </div>
     </form>
     <!-- END LOGIN FORM -->
-    <!-- BEGIN FORGOT PASSWORD FORM -->
-    <form class="forget-form" action="" method="post">
-        <h3 >Forget Password ?</h3>
-        <p>Enter your e-mail address below to reset your password.</p>
-        <div class="form-group">
-            <div class="input-icon">
-                <i class="fa fa-envelope"></i>
-                <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Email" name="email" />
-            </div>
-        </div>
-        <div class="form-actions">
-            <button type="button" id="back-btn" class="btn">
-                <i class="m-icon-swapleft"></i> Back
-            </button>
-            <button type="submit" class="btn blue pull-right">
-                Submit <i class="m-icon-swapright m-icon-white"></i>
-            </button>
-        </div>
-    </form>
-    <!-- END FORGOT PASSWORD FORM -->
-    <!-- BEGIN REGISTRATION FORM -->
-    <form class="register-form" action="/reg" method="post">
-        <h3 >Sign Up</h3>
-        <p>Enter your personal details below:</p>
-        <div class="form-group">
-            <label class="control-label visible-ie8 visible-ie9">Full Name</label>
-            <div class="input-icon">
-                <i class="fa fa-font"></i>
-                <input class="form-control placeholder-no-fix" type="text" placeholder="Full Name" name="fullname"/>
-            </div>
-        </div>
-        <div class="form-group">
-            <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
-            <label class="control-label visible-ie8 visible-ie9">Email</label>
-            <div class="input-icon">
-                <i class="fa fa-envelope"></i>
-                <input class="form-control placeholder-no-fix" type="text" placeholder="Email" name="email"/>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label visible-ie8 visible-ie9">Address</label>
-            <div class="input-icon">
-                <i class="fa fa-check"></i>
-                <input class="form-control placeholder-no-fix" type="text" placeholder="Address" name="address"/>
-            </div>
-        </div>
-        <p>Enter your account details below:</p>
-        <div class="form-group">
-            <label class="control-label visible-ie8 visible-ie9">Username</label>
-            <div class="input-icon">
-                <i class="fa fa-user"></i>
-                <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Username" name="username"/>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label visible-ie8 visible-ie9">Password</label>
-            <div class="input-icon">
-                <i class="fa fa-lock"></i>
-                <input class="form-control placeholder-no-fix" type="password" autocomplete="off" id="register_password" placeholder="Password" name="password"/>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label visible-ie8 visible-ie9">Re-type Your Password</label>
-            <div class="controls">
-                <div class="input-icon">
-                    <i class="fa fa-check"></i>
-                    <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="Re-type Your Password" name="rpassword"/>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label>
-                <input type="checkbox" name="tnc"/> I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
-            </label>
-            <div id="register_tnc_error"></div>
-        </div>
-        <div class="form-actions">
-            <button id="register-back-btn" type="button" class="btn">
-                <i class="m-icon-swapleft"></i>  Back
-            </button>
-            <button type="submit" id="register-submit-btn" class="btn blue pull-right">
-                Sign Up <i class="m-icon-swapright m-icon-white"></i>
-            </button>
-        </div>
-    </form>
-    <!-- END REGISTRATION FORM -->
 </div>
 <!-- END LOGIN -->
 <!-- BEGIN COPYRIGHT -->
 <div class="copyright">
-    2013 &copy; Metronic - Admin Dashboard Template.
+    2015 &copy; Parking Admin Demo.
 </div>
 <!-- END COPYRIGHT -->
 <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->

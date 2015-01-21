@@ -30,38 +30,50 @@
         <li class="">
             <a href="javascript:;">
                 <i class="fa fa-user"></i>
-                <span class="title">菜单1</span>
+                <span class="title">收费统计</span>
                 <span class="arrow "></span>
             </a>
             <ul class="sub-menu">
                 <li>
-                    <a href="${contextpath}/blog/create">
-                        2级菜单</a>
-                </li>
-                <li>
-                    <a href="${contextpath}/blog/author/${Session["loginUser"].id}">
-                        2级菜单</a>
+                    <a href="#">
+                        统计信息</a>
                 </li>
             </ul>
         </li>
         <li class="">
             <a href="javascript:;">
                 <i class="fa fa-sitemap"></i>
-                <span class="title">其他设置</span>
+                <span class="title">区域信息</span>
                 <span class="arrow "></span>
             </a>
             <ul class="sub-menu">
                 <li>
                     <a href="#">
-                        功能建设中..</a>
+                        实时信息</a>
                 </li>
                 <li>
                     <a href="#">
-                        功能建设中..</a>
+                        设备状态</a>
                 </li>
             </ul>
         </li>
-
+        <li class="">
+            <a href="javascript:;">
+                <i class="fa fa-sitemap"></i>
+                <span class="title">管理设置</span>
+                <span class="arrow "></span>
+            </a>
+            <ul class="sub-menu">
+                <li>
+                    <a href="#">
+                        区域管理</a>
+                </li>
+                <li>
+                    <a href="#">
+                        用户管理</a>
+                </li>
+            </ul>
+        </li>
 
     </ul>
     <!-- END SIDEBAR MENU -->
