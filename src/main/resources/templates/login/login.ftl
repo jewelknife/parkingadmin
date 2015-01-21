@@ -11,10 +11,10 @@ PurequestContexthase: http://themeforest.net/item/metronic-responsive-admin-dash
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
 <!--[if !IE]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
 <!-- BEGIN HEAD -->
-<#assign contextpath="${requestContextAttribute.contextPath}"/>
+<#assign contextpath="${rc.contextPath}"/>
 <head>
     <meta charset="utf-8" />
-    <title>jblog-login</title>
+    <title>登录</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="" name="description" />

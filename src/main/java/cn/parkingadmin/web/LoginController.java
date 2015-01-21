@@ -27,16 +27,19 @@ public class LoginController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(User userform, Model model, HttpSession session) {
-        User user = userService.findByUsername(userform.getUsername());
-        if (user == null) {
-            model.addAttribute("errorMsg", "User is not existst !");
-            return null;
-        }
-        user = userService.findByUsernameAndPassword(userform.getUsername(), userform.getPassword());
-        if (user == null) {
-            model.addAttribute("errorMsg", "Password is not correctly !");
-            return null;
-        }
+//        User user = userService.findByUsername(userform.getUsername());
+//        if (user == null) {
+//            model.addAttribute("errorMsg", "User is not existst !");
+//            return null;
+//        }
+//        user = userService.findByUsernameAndPassword(userform.getUsername(), userform.getPassword());
+//        if (user == null) {
+//            model.addAttribute("errorMsg", "Password is not correctly !");
+//            return null;
+//        }
+//        session.setAttribute("loginUser", user);
+        User user = new User("admin", "aaaa", "adb@aa.com");
+        user.setId(1l);
         session.setAttribute("loginUser", user);
         return "redirect:/home";
     }
