@@ -6,7 +6,7 @@ import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.Param;
 
 /**
- * Created by chen_yingbo on 11/14/14.
+ * Created by jewelknife on 11/14/14.
  */
 public interface UserRepository extends Repository<User, Long> {
 
