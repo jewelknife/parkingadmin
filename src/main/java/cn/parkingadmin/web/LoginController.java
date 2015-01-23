@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Created by jewelknife on 2015/1/20.
  */
-@Controller
+//@Controller
 @RequestMapping("/login/*")
 public class LoginController {
 

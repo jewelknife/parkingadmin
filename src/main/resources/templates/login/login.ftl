@@ -1,5 +1,5 @@
 
-<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <!-- 
 Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.0.2
 Version: 1.5.4
@@ -56,12 +56,20 @@ PurequestContexthase: http://themeforest.net/item/metronic-responsive-admin-dash
             <button class="close" data-close="alert"></button>
             <span>请输入用户名和密码.</span>
         </div>
-        <#if errorMsg?? >
-        <div class="alert alert-danger">
-            <button class="close" data-close="alert"></button>
-            <span> ${errorMsg}</span>
-        </div>
-        </#if>
+        <p th:if="${param.logout}" class="alert">You have been logged out</p>
+        <p th:if="${param.error}" class="alert alert-error">There was an error, please try again</p>
+        <#--<#if errorMsg?? >-->
+        <#--<div class="alert alert-danger">-->
+            <#--<button class="close" data-close="alert"></button>-->
+            <#--<span> ${errorMsg}</span>-->
+        <#--</div>-->
+        <#--</#if>-->
+    <#--<#if param?? && param.logout?? >-->
+        <#--<p class="alert">You have been logged out</p>-->
+    <#--</#if>-->
+    <#--<#if param?? && param.error?? >-->
+        <#--<p class="alert alert-error">There was an error, please try again</p>-->
+    <#--</#if>-->
         <div class="form-group">
             <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
             <label class="control-label visible-ie8 visible-ie9">用户名</label>
