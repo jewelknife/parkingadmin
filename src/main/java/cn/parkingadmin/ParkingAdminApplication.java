@@ -31,7 +31,7 @@ public class ParkingAdminApplication extends WebMvcConfigurerAdapter {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/login").setViewName("/login/login");
+        registry.addViewController("/login").setViewName("login");
     }
 
     @Bean
@@ -50,14 +50,16 @@ public class ParkingAdminApplication extends WebMvcConfigurerAdapter {
 
         @Override
         protected void configure(HttpSecurity http) throws Exception {
-            http.authorizeRequests().antMatchers("/assets/**").permitAll().anyRequest()
-                    .fullyAuthenticated().and().formLogin().loginPage("/login")
-                    .failureUrl("/login?error").permitAll();
+            http.csrf().disable().authorizeRequests().antMatchers("/css/**","/js/**").permitAll().anyRequest()
+                    .fullyAuthenticated().and().formLogin().loginPage("/login").defaultSuccessUrl("/index")
+                    .failureUrl("/login?error").permitAll().and().rememberMe();
         }
 
         @Override
         public void configure(AuthenticationManagerBuilder auth) throws Exception {
-            auth.jdbcAuthentication().dataSource(this.dataSource);
+            auth.inMemoryAuthentication()
+                    .withUser("user").password("123").roles("USER").and()
+                    .withUser("admin").password("123").roles("USER", "ADMIN");
         }
 
     }
