@@ -9,7 +9,7 @@ public interface UserService {
 
     User findByUsername(String username);
 
-    User findByUsernameAndPassword(String username, String password);
+//    User findByUsernameAndPassword(String username, String password);
 
     User save(User user);
 

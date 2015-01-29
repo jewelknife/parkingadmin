@@ -6,22 +6,19 @@ import javax.persistence.Entity;
 /**
  * Created by chen_yingbo on 11/14/14.
  */
-@Entity(name = "user")
+@Entity(name = "users")
 public class User extends AbstractEntity {
 
+    @Column(name = "user_name")
     private String username;
+    @Column(name = "user_password")
     private String password;
-    @Column(unique = true)
-    private String email;
-
-    public User() {
-    }
-
-    public User(String username, String password, String email) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-    }
+    @Column(name = "user_code")
+    private String userCode;
+    @Column(name = "user_sex")
+    private String userSex;
+    @Column(name = "user_description")
+    private String userDescription;
 
     public String getUsername() {
         return username;
@@ -39,11 +36,27 @@ public class User extends AbstractEntity {
         this.password = password;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUserCode() {
+        return userCode;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
+    }
+
+    public String getUserSex() {
+        return userSex;
+    }
+
+    public void setUserSex(String userSex) {
+        this.userSex = userSex;
+    }
+
+    public String getUserDescription() {
+        return userDescription;
+    }
+
+    public void setUserDescription(String userDescription) {
+        this.userDescription = userDescription;
     }
 }

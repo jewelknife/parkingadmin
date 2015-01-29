@@ -1,5 +1,7 @@
 <#include "/common/header.ftl" />
-        <div id="page-wrapper">
+<link href="${contextpath}/css/timeline.css" rel="stylesheet">
+<link href="${contextpath}/js/morrisjs/morris.css" rel="stylesheet">
+<div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">首页</h1>
@@ -311,4 +313,7 @@
             <!-- /.row -->
         </div>
         <!-- /#page-wrapper -->
+<script src="${contextpath}/js/raphael/raphael-min.js"></script>
+<script src="${contextpath}/js/morrisjs/morris.min.js"></script>
+<script src="${contextpath}/js/morris-data.js"></script>
 <#include "/common/footer.ftl" />

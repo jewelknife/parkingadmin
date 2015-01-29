@@ -18,18 +18,12 @@ public class IndexController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String none() {
-        return "redirect:/login";
+        return "redirect:/index";
     }
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String home() {
         return "index";
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/hello", method = RequestMethod.GET)
-    public String hello() {
-        return "hi , test is a test.";
     }
 
 }

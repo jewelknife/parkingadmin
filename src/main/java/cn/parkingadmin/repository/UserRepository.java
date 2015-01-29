@@ -12,8 +12,8 @@ public interface UserRepository extends Repository<User, Long> {
 
     User findByUsername(String username);
 
-    @Query("select c from user c where c.username = :username and c.password = MD5(:password)")
-    User findByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
+//    @Query("select c from user c where c.username = :username and c.password = MD5(:password)")
+//    User findByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
 
     User save(User user);
 

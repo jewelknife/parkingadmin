@@ -8,8 +8,10 @@ import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.annotation.Order;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -18,11 +20,13 @@ import javax.sql.DataSource;
 import java.util.Date;
 import java.util.Map;
 
+@EnableJpaRepositories
 @EnableAutoConfiguration
 @ComponentScan
 //@ComponentScan(basePackages = "web.function", useDefaultFilters = false, includeFilters = {
 //        @ComponentScan.Filter(type = FilterType.ANNOTATION, value = {Controller.class})
 //})
+@EnableWebSecurity
 public class ParkingAdminApplication extends WebMvcConfigurerAdapter {
 
     public static void main(String[] args) {
@@ -51,8 +55,8 @@ public class ParkingAdminApplication extends WebMvcConfigurerAdapter {
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             http.csrf().disable().authorizeRequests().antMatchers("/css/**","/js/**").permitAll().anyRequest()
-                    .fullyAuthenticated().and().formLogin().loginPage("/login").defaultSuccessUrl("/index")
-                    .failureUrl("/login?error").permitAll().and().rememberMe();
+                    .authenticated().and().formLogin().loginPage("/login").defaultSuccessUrl("/index")
+                    .failureUrl("/login?error").and().logout().logoutUrl("/logout").logoutSuccessUrl("/login").permitAll().and().rememberMe();
         }
 
         @Override
