@@ -2,6 +2,7 @@ package cn.parkingadmin.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import java.util.Date;
 
 /**
@@ -18,6 +19,8 @@ public class Fees extends AbstractEntity {
     private double feeNum;
     @Column(name="fee_date")
     private Date feeDate;
+//    @ManyToOne(map)
+//    private Area area;
 
     public int getAreaId() {
         return areaId;

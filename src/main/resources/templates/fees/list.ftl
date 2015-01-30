@@ -21,8 +21,8 @@
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                     <tr>
-                                        <th>Rendering engine</th>
-                                        <th>Browser</th>
+                                        <th>区域编号</th>
+                                        <th>区域名</th>
                                         <th>Platform(s)</th>
                                         <th>Engine version</th>
                                         <th>CSS grade</th>
