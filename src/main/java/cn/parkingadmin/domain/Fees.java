@@ -2,6 +2,7 @@ package cn.parkingadmin.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.util.Date;
 
@@ -11,7 +12,7 @@ import java.util.Date;
 @Entity(name="fees")
 public class Fees extends AbstractEntity {
 
-    @Column(name="area_id")
+    @Column(name="area_id", insertable = false, updatable = false)
     private int areaId;
     @Column(name="user_code")
     private String userCode;
@@ -19,8 +20,17 @@ public class Fees extends AbstractEntity {
     private double feeNum;
     @Column(name="fee_date")
     private Date feeDate;
-//    @ManyToOne(map)
-//    private Area area;
+    @ManyToOne
+    @JoinColumn(name="area_id")
+    private Area area;
+
+    public Area getArea() {
+        return area;
+    }
+
+    public void setArea(Area area) {
+        this.area = area;
+    }
 
     public int getAreaId() {
         return areaId;

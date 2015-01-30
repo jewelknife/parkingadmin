@@ -4,7 +4,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">统计信息</h1>
+                    <h1 class="page-header">区域信息</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -13,7 +13,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            统计信息
+                            区域信息
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -23,20 +23,22 @@
                                     <tr>
                                         <th>区域编号</th>
                                         <th>区域名</th>
-                                        <th>收费日期</th>
-                                        <th>收费员</th>
-                                        <th>费用</th>
+                                        <th>车位数</th>
+                                        <th>描述</th>
+                                        <th>管理员</th>
+                                        <th>实时信息</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <#if pageBean??>
-                                        <#list pageBean.content as fees>
+                                        <#list pageBean.content as area>
                                         <tr class="odd gradeX">
-                                            <td>${fees.area.areaCode}</td>
-                                            <td>${fees.area.areaName}</td>
-                                            <td>${fees.feeDate}</td>
-                                            <td>${fees.userCode}</td>
-                                            <td>${fees.feeNum}</td>
+                                            <td>${area.areaCode}</td>
+                                            <td>${area.areaName}</td>
+                                            <td>${area.areaParkingCapacity}</td>
+                                            <td>${area.areaDescription?if_exists}</td>
+                                            <td>${area.manager.userCode}</td>
+                                            <td>&nbsp</td>
                                         </tr>
                                         </#list>
                                     </#if>

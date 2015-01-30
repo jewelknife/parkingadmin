@@ -73,7 +73,7 @@
                             <a href="#"><i class="fa fa-sitemap fa-fw"></i> 区域信息<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="#">实时信息</a>
+                                    <a href="${contextpath}/area/list">实时信息</a>
                                 </li>
                                 <li>
                                     <a href="#">设备状态</a>
@@ -101,10 +101,10 @@
                             <a href="#"><i class="fa fa-sitemap fa-fw"></i> 管理设置<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="#">区域管理</a>
+                                    <a href="/admin/area">区域管理</a>
                                 </li>
                                 <li>
-                                    <a href="#">用户管理</a>
+                                    <a href="/admin/user">用户管理</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

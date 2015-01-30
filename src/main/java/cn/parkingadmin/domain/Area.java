@@ -6,6 +6,8 @@ package cn.parkingadmin.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  * @author <A HREF="mailto:chen_yingbo@vobile.cn">Yingbo Chen</A>
@@ -21,8 +23,29 @@ public class Area extends AbstractEntity {
     private String areaName;
     @Column(name="area_parking_capacity")
     private int areaParkingCapacity;
+    @Column(name="area_manager_id", insertable = false, updatable = false)
+    private int areaManagerId;
     @Column(name="area_description")
     private String areaDescription;
+    @ManyToOne
+    @JoinColumn(name="area_manager_id")
+    private User manager;
+
+    public int getAreaManagerId() {
+        return areaManagerId;
+    }
+
+    public void setAreaManagerId(int areaManagerId) {
+        this.areaManagerId = areaManagerId;
+    }
+
+    public User getManager() {
+        return manager;
+    }
+
+    public void setManager(User manager) {
+        this.manager = manager;
+    }
 
     public String getAreaCode() {
         return areaCode;
