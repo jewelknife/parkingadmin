@@ -38,6 +38,7 @@
                                         <input type="checkbox" id="remember-me" name="remember-me"/>记住我
                                     </label>
                                 </div>
+                                <#--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
                                 <input name="login" value="登陆" type="submit"/>
                             </fieldset>
                         </form>

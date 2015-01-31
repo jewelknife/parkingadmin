@@ -97,18 +97,24 @@
                             <!-- /.nav-second-level -->
                         </li>
 
+                        <@sec.authorize access="hasRole('userManager') or hasRole('areaManager')">
                         <li>
                             <a href="#"><i class="fa fa-sitemap fa-fw"></i> 管理设置<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
+                                <@sec.authorize access="hasRole('areaManager')">
                                 <li>
                                     <a href="/admin/area">区域管理</a>
                                 </li>
+                                </@sec.authorize>
+                                <@sec.authorize access="hasRole('userManager')">
                                 <li>
                                     <a href="/admin/user">用户管理</a>
                                 </li>
+                                </@sec.authorize>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                        </@sec.authorize>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
