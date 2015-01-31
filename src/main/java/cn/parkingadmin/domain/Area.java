@@ -10,9 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 /**
- * @author <A HREF="mailto:chen_yingbo@vobile.cn">Yingbo Chen</A>
- * @version 1.3 1/30/15
- * @since 1.3
  */
 @Entity(name="areas")
 public class Area extends AbstractEntity {

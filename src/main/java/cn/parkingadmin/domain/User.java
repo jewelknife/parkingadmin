@@ -4,7 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 
 /**
- * Created by chen_yingbo on 11/14/14.
  */
 @Entity(name = "users")
 public class User extends AbstractEntity {

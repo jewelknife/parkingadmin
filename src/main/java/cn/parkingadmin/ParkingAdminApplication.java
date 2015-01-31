@@ -6,12 +6,15 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -22,7 +25,9 @@ import javax.sql.DataSource;
 @EnableJpaRepositories
 @EnableAutoConfiguration
 @ComponentScan
-@EnableWebMvcSecurity
+@EnableWebSecurity
+@Configuration
+@EnableGlobalMethodSecurity(securedEnabled = true)
 public class ParkingAdminApplication extends WebMvcConfigurerAdapter {
 
     public static void main(String[] args) {
@@ -53,8 +58,8 @@ public class ParkingAdminApplication extends WebMvcConfigurerAdapter {
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             http.csrf().disable().authorizeRequests().antMatchers("/css/**", "/js/**").permitAll()
-                    .antMatchers("/admin/area/**").hasRole("areaManager")
-                    .antMatchers("/admin/user/**").hasRole("userManager")
+                    .antMatchers("/admin/area**").access("hasRole('areaManager')")
+                    .antMatchers("/admin/user**").access("hasRole('userManager')")
                     .anyRequest().authenticated().and().formLogin().loginPage("/login").defaultSuccessUrl("/index")
                     .failureUrl("/login?error").permitAll().and().logout().logoutUrl("/logout").logoutSuccessUrl("/login").permitAll().and().rememberMe();
         }
