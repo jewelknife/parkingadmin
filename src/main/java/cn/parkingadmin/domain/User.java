@@ -2,6 +2,7 @@ package cn.parkingadmin.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.SqlResultSetMapping;
 
 /**
  */

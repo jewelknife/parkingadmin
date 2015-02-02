@@ -1,5 +1,6 @@
 package cn.parkingadmin.web;
 
+import cn.parkingadmin.domain.Area;
 import cn.parkingadmin.domain.Fees;
 import cn.parkingadmin.service.FeesService;
 import org.apache.commons.lang3.StringUtils;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 /**
  * Created by jewelknife on 2015/1/29.

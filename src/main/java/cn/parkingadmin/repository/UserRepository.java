@@ -5,12 +5,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
-import org.springframework.data.repository.query.Param;
+
+import java.util.List;
 
 /**
  * Created by jewelknife on 11/14/14.
  */
 public interface UserRepository extends Repository<User, Long> {
+
+    @Query("select u.id, u.username, u.userCode from users u")
+    List<User> findAll();
 
     Page<User> findAll(Pageable pageable);
 

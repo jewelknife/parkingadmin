@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 /**
  * Created by jewelknife on 2015/1/31.
  */
@@ -51,6 +53,12 @@ public class UserController {
         }
         Pageable pageRequest = new PageRequest(pageInt, PAGE_LIMIT, Sort.Direction.DESC, "id");
         return userService.findAll(pageRequest);
+    }
+
+    @RequestMapping(value="/user/list", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public List<User> listWithJson() {
+        return userService.findAll();
     }
 
 }

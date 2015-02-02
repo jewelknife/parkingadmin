@@ -18,30 +18,65 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="dataTable_wrapper">
-                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                                    <thead>
-                                    <tr>
-                                        <th>区域编号</th>
-                                        <th>区域名</th>
-                                        <th>收费日期</th>
-                                        <th>收费员</th>
-                                        <th>费用</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <#if pageBean??>
-                                        <#list pageBean.content as fees>
-                                        <tr class="odd gradeX">
-                                            <td>${fees.area.areaCode}</td>
-                                            <td>${fees.area.areaName}</td>
-                                            <td>${fees.feeDate}</td>
-                                            <td>${fees.userCode}</td>
-                                            <td>${fees.feeNum}</td>
+                                <div class="row">
+                                    <form class="form-horizontal" action="/fees/list" role="form">
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">区域:</label>
+                                                <div class="col-sm-10">
+                                                    <select class="form-control" name="area_id">
+                                                        <option value="0">所有</option>
+                                                        <option>aaa</option>
+                                                        <option>aaa</option>
+                                                        <option>aaa</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">人员:</label>
+                                                <div class="col-sm-10">
+                                                    <select class="form-control" name="user_code">
+                                                        <option value="all">所有</option>
+                                                        <option>aaa</option>
+                                                        <option>aaa</option><option>aaa</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 right">
+                                            <input type="submit" class="btn" value="查询" name="submit"/>
+                                        </div>
+                                    </form>
+                                </div>
+                                <br/>
+                                <div class="row">
+                                    <table class="table table-striped table-bordered table-hover" id="dataTables-fees">
+                                        <thead>
+                                        <tr>
+                                            <th>区域编号</th>
+                                            <th>区域名</th>
+                                            <th>收费日期</th>
+                                            <th>收费员</th>
+                                            <th>费用</th>
                                         </tr>
-                                        </#list>
-                                    </#if>
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                        <#if pageBean??>
+                                            <#list pageBean.content as fees>
+                                            <tr class="odd gradeX">
+                                                <td>${fees.area.areaCode}</td>
+                                                <td>${fees.area.areaName}</td>
+                                                <td>${fees.feeDate}</td>
+                                                <td>${fees.userCode}</td>
+                                                <td>${fees.feeNum}</td>
+                                            </tr>
+                                            </#list>
+                                        </#if>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                             <!-- /.table-responsive -->
                         </div>
