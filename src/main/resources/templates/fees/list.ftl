@@ -24,11 +24,8 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">区域:</label>
                                                 <div class="col-sm-10">
-                                                    <select class="form-control" name="area_id">
+                                                    <select class="form-control" name="area_id" id="areaSelect">
                                                         <option value="0">所有</option>
-                                                        <option>aaa</option>
-                                                        <option>aaa</option>
-                                                        <option>aaa</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -37,10 +34,8 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">人员:</label>
                                                 <div class="col-sm-10">
-                                                    <select class="form-control" name="user_code">
+                                                    <select class="form-control" name="user_code" id="userSelect">
                                                         <option value="all">所有</option>
-                                                        <option>aaa</option>
-                                                        <option>aaa</option><option>aaa</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -126,4 +121,11 @@
         <!-- /#page-wrapper -->
 <script src="${contextpath}/js/DataTables/media/js/jquery.dataTables.min.js"></script>
 <script src="${contextpath}/js/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+<script type="application/javascript">
+
+    $(function(){
+        initSelect($("#areaSelect"), '/area/all.json', areaSelectOptionAppend);
+        initSelect($("#userSelect"), '/user/all.json', userSelectOptionAppend);
+    });
+</script>
 <#include "/common/footer.ftl" />

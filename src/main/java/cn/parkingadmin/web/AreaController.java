@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 /**
  * Created by jewelknife on 2015/1/31.
  */
@@ -35,6 +37,12 @@ public class AreaController {
             @RequestParam(defaultValue = "0", required = false) String page
             , @RequestParam(defaultValue = "all", required = false) String area_code) {
         return this.getPageBean(page, area_code);
+    }
+
+    @RequestMapping(value="/area/all", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public List<Area> allListWithJson() {
+        return areaService.findAll();
     }
 
     @RequestMapping(value="/area/list", produces = MediaType.TEXT_HTML_VALUE)

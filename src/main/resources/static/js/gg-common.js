@@ -31,3 +31,21 @@ $(function() {
         element.addClass('active');
     }
 });
+
+function initSelect(obj, action, appendFunc) {
+    $.get(action, function(data) {
+        if (data && data.length > 0) {
+            for (var i = 0; i < data.length ; i++) {
+                $(obj).append(appendFunc(data[i]));
+            }
+        }
+    });
+}
+
+function areaSelectOptionAppend(area) {
+    return "<option value='" + area.id +  "'>" + area.areaName + "</option>";
+}
+
+function userSelectOptionAppend(user) {
+    return "<option value='" + user.userCode +  "'>" + user.username + "</option>";
+}

@@ -13,7 +13,6 @@ import java.util.List;
  */
 public interface UserRepository extends Repository<User, Long> {
 
-    @Query("select u.id, u.username, u.userCode from users u")
     List<User> findAll();
 
     Page<User> findAll(Pageable pageable);

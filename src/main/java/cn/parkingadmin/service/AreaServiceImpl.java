@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by jewelknife on 2015/1/31.
  */
@@ -25,5 +27,10 @@ public class AreaServiceImpl implements AreaService {
             pageBean = areaRepository.findByAreaCode(areaCode, pageable);
         }
         return pageBean;
+    }
+
+    @Override
+    public List<Area> findAll() {
+        return areaRepository.findAll();
     }
 }

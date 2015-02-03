@@ -1,5 +1,7 @@
 package cn.parkingadmin.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.SqlResultSetMapping;
@@ -12,6 +14,7 @@ public class User extends AbstractEntity {
     @Column(name = "user_name")
     private String username;
     @Column(name = "user_password")
+    @JsonIgnore
     private String password;
     @Column(name = "user_code")
     private String userCode;

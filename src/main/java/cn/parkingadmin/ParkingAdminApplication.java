@@ -25,7 +25,7 @@ import javax.sql.DataSource;
 @EnableJpaRepositories
 @EnableAutoConfiguration
 @ComponentScan
-@EnableWebSecurity
+@EnableWebMvcSecurity
 @Configuration
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class ParkingAdminApplication extends WebMvcConfigurerAdapter {
