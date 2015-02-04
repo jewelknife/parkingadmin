@@ -55,7 +55,17 @@ public class FeesListController {
               @RequestParam(defaultValue = "0", required = false) String page
             , @RequestParam(defaultValue = "all", required = false) String user_code
             , @RequestParam(defaultValue = "0",  required = false) Integer area_id) {
-        ModelAndView modelAndView = new ModelAndView("/fees/list");
+        ModelAndView modelAndView = new ModelAndView("/fees/fees");
+        modelAndView.getModel().put("pageBean", this.getPageBean(page, area_id, user_code));
+        return modelAndView;
+    }
+
+    @RequestMapping(value="/q", produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView qryList(
+            @RequestParam(defaultValue = "0", required = false) String page
+            , @RequestParam(defaultValue = "all", required = false) String user_code
+            , @RequestParam(defaultValue = "0",  required = false) Integer area_id) {
+        ModelAndView modelAndView = new ModelAndView("/fees/_list");
         modelAndView.getModel().put("pageBean", this.getPageBean(page, area_id, user_code));
         return modelAndView;
     }

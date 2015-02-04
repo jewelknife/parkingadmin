@@ -2,6 +2,7 @@ package cn.parkingadmin.service;
 
 import cn.parkingadmin.domain.Area;
 import cn.parkingadmin.repository.AreaRepository;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,12 +20,12 @@ public class AreaServiceImpl implements AreaService {
     private AreaRepository areaRepository;
 
     @Override
-    public Page<Area> findList(String areaCode, Pageable pageable) {
+    public Page<Area> findList(Long areaId, Pageable pageable) {
         Page<Area> pageBean = null;
-        if ("all".equalsIgnoreCase(areaCode)) {
+        if (areaId == 0) {
             pageBean = areaRepository.findAll(pageable);
         } else {
-            pageBean = areaRepository.findByAreaCode(areaCode, pageable);
+            pageBean = areaRepository.findById(areaId, pageable);
         }
         return pageBean;
     }

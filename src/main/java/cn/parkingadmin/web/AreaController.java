@@ -33,10 +33,8 @@ public class AreaController {
 
     @RequestMapping(value="/area/list", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Page<Area> listWithJson(
-            @RequestParam(defaultValue = "0", required = false) String page
-            , @RequestParam(defaultValue = "all", required = false) String area_code) {
-        return this.getPageBean(page, area_code);
+    public Page<Area> listWithJson( @RequestParam(defaultValue = "0", required = false) String page, @RequestParam(defaultValue = "0", required = false) Long area_id) {
+        return this.getPageBean(page, area_id);
     }
 
     @RequestMapping(value="/area/all", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -46,28 +44,36 @@ public class AreaController {
     }
 
     @RequestMapping(value="/area/list", produces = MediaType.TEXT_HTML_VALUE)
-    public String list(
-            @RequestParam(defaultValue = "0", required = false) String page
-            , @RequestParam(defaultValue = "all", required = false) String areaCode, ModelMap model) {
-        model.put("pageBean", this.getPageBean(page, areaCode));
-        return "/area/list";
+    public String list( @RequestParam(defaultValue = "0", required = false) String page, @RequestParam(defaultValue = "0", required = false) Long area_id, ModelMap model) {
+        model.put("pageBean", this.getPageBean(page, area_id));
+        return "/area/area";
+    }
+
+    @RequestMapping(value="/area/q", produces = MediaType.TEXT_HTML_VALUE)
+    public String qryList( @RequestParam(defaultValue = "0", required = false) String page , @RequestParam(defaultValue = "0", required = false) Long area_id, ModelMap model) {
+        this.list(page, area_id, model);
+        return "/area/_list";
     }
 
     @RequestMapping(value="/admin/area", produces = MediaType.TEXT_HTML_VALUE)
-    public String areaAdminList(
-            @RequestParam(defaultValue = "0", required = false) String page
-            , @RequestParam(defaultValue = "all", required = false) String areaCode, ModelMap model) {
-        this.list(page, areaCode, model);
-        return "/admin/area_list";
+    public String areaAdminList(@RequestParam(defaultValue = "0", required = false) String page, @RequestParam(defaultValue = "0", required = false) Long area_id, ModelMap model) {
+        this.list(page, area_id, model);
+        return "/admin/admin_area";
     }
 
-    private Page<Area> getPageBean(String page, String areaCode) {
+    @RequestMapping(value="/admin/area/q", produces = MediaType.TEXT_HTML_VALUE)
+    public String qryAdminList( @RequestParam(defaultValue = "0", required = false) String page , @RequestParam(defaultValue = "0", required = false) Long area_id, ModelMap model) {
+        this.list(page, area_id, model);
+        return "/admin/admin_area_list";
+    }
+
+    private Page<Area> getPageBean(String page, Long areaId) {
         int pageInt = 0;
         if (StringUtils.isNumeric(page) && Integer.parseInt(page) > 0) {
             pageInt = Integer.parseInt(page) - 1;
         }
         Pageable pageRequest = new PageRequest(pageInt, PAGE_LIMIT, Sort.Direction.DESC, "id");
-        return areaService.findList(areaCode, pageRequest);
+        return areaService.findList(areaId, pageRequest);
     }
 
 }

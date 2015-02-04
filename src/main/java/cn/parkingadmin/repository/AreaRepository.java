@@ -17,6 +17,6 @@ public interface AreaRepository extends Repository<Area, Long> {
 
     Page<Area> findAll(Pageable pageable);
 
-    Page<Area> findByAreaCode(String areaCode, Pageable pageable);
+    Page<Area> findById(Long areaId, Pageable pageable);
 
 }

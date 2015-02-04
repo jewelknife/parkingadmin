@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>ParkingAdmin</title>
+    <title>停车系统</title>
 
     <link href="${contextpath}/js/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="${contextpath}/js/metisMenu/dist/metisMenu.min.css" rel="stylesheet">

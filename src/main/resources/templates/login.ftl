@@ -39,7 +39,7 @@
                                     </label>
                                 </div>
                                 <#--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
-                                <input name="login" value="登陆" type="submit"/>
+                                <input name="login" value="登陆" class="btn btn-lg btn-success btn-block" type="submit"/>
                             </fieldset>
                         </form>
                     </div>

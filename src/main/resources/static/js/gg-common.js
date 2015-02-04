@@ -49,3 +49,9 @@ function areaSelectOptionAppend(area) {
 function userSelectOptionAppend(user) {
     return "<option value='" + user.userCode +  "'>" + user.username + "</option>";
 }
+
+function bindQryEvent(btn, form, action, upgradeDiv) {
+    $(btn).click(function(){
+        $(upgradeDiv).load(action, $(form).serialize());
+    });
+}

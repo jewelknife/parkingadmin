@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface AreaService {
 
-    Page<Area> findList(String areaCode, Pageable pageable);
+    Page<Area> findList(Long areaId, Pageable pageable);
 
     List<Area> findAll();
 
