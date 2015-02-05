@@ -19,4 +19,7 @@ public interface AreaRepository extends Repository<Area, Long> {
 
     Page<Area> findById(Long areaId, Pageable pageable);
 
+    Area save(Area area);
+
+    void delete(Long id);
 }

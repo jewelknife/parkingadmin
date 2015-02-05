@@ -16,4 +16,7 @@ public interface AreaService {
 
     List<Area> findAll();
 
+    Area save(Area area);
+
+    void delete(Long id);
 }

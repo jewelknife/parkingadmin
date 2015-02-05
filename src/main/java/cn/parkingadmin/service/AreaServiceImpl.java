@@ -34,4 +34,14 @@ public class AreaServiceImpl implements AreaService {
     public List<Area> findAll() {
         return areaRepository.findAll();
     }
+
+    @Override
+    public Area save(Area area) {
+        return areaRepository.save(area);
+    }
+
+    @Override
+    public void delete(Long id) {
+        areaRepository.delete(id);
+    }
 }

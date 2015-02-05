@@ -3,6 +3,7 @@ package cn.parkingadmin.web;
 import cn.parkingadmin.domain.Area;
 import cn.parkingadmin.service.AreaService;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -12,10 +13,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,6 +24,8 @@ import java.util.List;
  */
 @Controller
 public class AreaController {
+
+    private static Logger logger = Logger.getLogger(AreaController.class);
 
     @Value("${parkingadmin.pagesize}")
     private int PAGE_LIMIT = 10;
@@ -65,6 +67,53 @@ public class AreaController {
     public String qryAdminList( @RequestParam(defaultValue = "0", required = false) String page , @RequestParam(defaultValue = "0", required = false) Long area_id, ModelMap model) {
         this.list(page, area_id, model);
         return "/admin/admin_area_list";
+    }
+
+    @RequestMapping(value="/admin/area/new", method = RequestMethod.POST)
+    @ResponseBody
+    public String _new(Area form,Model model) {
+        Area area = null;
+        try {
+            area = areaService.save(form);
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+        }
+        if (area == null) {
+            model.addAttribute("msg", "Save fail!");
+        } else {
+            model.addAttribute("msg", "sucess");
+        }
+        return null;
+    }
+
+    @RequestMapping(value="/admin/area/{id}", method = RequestMethod.PUT)
+    @ResponseBody
+    public String update(Area form, Model model) {
+        Area area = null;
+        try {
+            area = areaService.save(form);
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+        }
+        if (area == null) {
+            model.addAttribute("msg", "Save fail!");
+        } else {
+            model.addAttribute("msg", "sucess");
+        }
+        return null;
+    }
+
+    @RequestMapping(value="/admin/area/{id}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public String delete(@PathVariable long id, Model model) {
+        try {
+            areaService.delete(id);
+            model.addAttribute("msg", "sucess");
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            model.addAttribute("msg", "Save fail!");
+        }
+        return null;
     }
 
     private Page<Area> getPageBean(String page, Long areaId) {
