@@ -50,6 +50,11 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public int changePasswod(long id, String oripasswd, String newpasswd, String repasswd) {
+        return 0;
+    }
+
+    @Override
     public User findOne(Long id) {
         return userRepository.findOne(id);
     }

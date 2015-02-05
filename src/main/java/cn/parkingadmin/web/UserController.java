@@ -10,9 +10,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -43,6 +45,21 @@ public class UserController {
             , ModelMap model) {
         model.put("pageBean", this.getPageBean(page));
         return "/admin/user_list";
+    }
+
+    @RequestMapping(value="/user/changePasswd", method= RequestMethod.PUT)
+    @ResponseBody
+    public void changePasswd(@RequestParam(required = true) String oripasswd
+            , @RequestParam(required = true) String newpasswd
+            , @RequestParam(required = true) String renewpasswd
+//            , @(required = true) String renewpasswd
+            , ModelMap model) {
+        SecurityContextHolder.getContext().getAuthentication();
+        if (!newpasswd.equals(renewpasswd)) {
+            model.put("msg", "newpasswd not equal repasswd!");
+            model.put("error_code", "WC0031");
+        } else {
+        }
     }
 
     private Page<User> getPageBean(String page) {

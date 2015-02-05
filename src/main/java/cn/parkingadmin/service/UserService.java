@@ -21,6 +21,8 @@ public interface UserService {
 
     User save(User user);
 
+    int changePasswod(long id, String oripasswd, String newpasswd, String repasswd);
+
     User findOne(Long id);
 
 }

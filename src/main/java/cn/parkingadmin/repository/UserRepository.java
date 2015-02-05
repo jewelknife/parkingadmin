@@ -24,6 +24,9 @@ public interface UserRepository extends Repository<User, Long> {
 
     User save(User user);
 
+    @Query("update users set password = MD5(:password) where id = :id and password = MD5(:oripasswd)")
+    int changePasswod(long id, String oripasswd, String password);
+
     User findOne(Long id);
 
 }

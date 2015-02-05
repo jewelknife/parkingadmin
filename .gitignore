@@ -1,1 +1,16 @@
 # Created by .gitignore support plugin (hsz.mobi)
+cn.parkingadmin.iml
+.idea
+.idea/copyright
+.idea/inspectionProfiles
+.idea/scopes
+.idea/libraries
+.idea/.name
+.idea/workspace.xml
+.idea/modules.xml
+.idea/encodings.xml
+.idea/uiDesigner.xml
+.idea/compiler.xml
+.idea/sqldialects.xml
+.idea/misc.xml
+.idea/vcs.xml
