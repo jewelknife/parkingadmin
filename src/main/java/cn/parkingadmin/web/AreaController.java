@@ -69,26 +69,9 @@ public class AreaController {
         return "/admin/admin_area_list";
     }
 
-    @RequestMapping(value="/admin/area/new", method = RequestMethod.POST)
+    @RequestMapping(value="/admin/area/save", method = RequestMethod.POST)
     @ResponseBody
     public String _new(Area form,Model model) {
-        Area area = null;
-        try {
-            area = areaService.save(form);
-        } catch (Exception ex) {
-            logger.error(ex.getMessage(), ex);
-        }
-        if (area == null) {
-            model.addAttribute("msg", "Save fail!");
-        } else {
-            model.addAttribute("msg", "sucess");
-        }
-        return null;
-    }
-
-    @RequestMapping(value="/admin/area/{id}", method = RequestMethod.PUT)
-    @ResponseBody
-    public String update(Area form, Model model) {
         Area area = null;
         try {
             area = areaService.save(form);

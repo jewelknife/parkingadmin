@@ -55,3 +55,22 @@ function bindQryEvent(btn, form, action, upgradeDiv) {
         $(upgradeDiv).load(action, $(form).serialize());
     });
 }
+
+function checkInput(obj, blankErrMsg) {
+    if ($(obj) && $(obj).val() == '') {
+        $(obj).focus();
+        alert(blankErrMsg);
+        return false;
+    }
+    return true;
+}
+function checkNumberInput(obj, blankErrMsg) {
+    if (checkInput(obj, blankErrMsg)) {
+        if ($.isNumeric($(obj).var())) {
+            $(obj).focus();
+            alert("非法数字!请检查输入!");
+            return false;
+        }
+    }
+    return true;
+}

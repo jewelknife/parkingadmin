@@ -1,4 +1,4 @@
-<table class="table table-striped table-bordered table-hover" id="dataTables-example">
+<table class="table table-striped table-bordered table-hover" id="dataTables-erea">
     <thead>
     <tr>
         <th>区域编号</th>
@@ -16,18 +16,32 @@
             <td>${area.areaCode}</td>
             <td>${area.areaName}</td>
             <td>${area.areaParkingCapacity}</td>
-            <td>${area.areaDescription?if_exists}</td>
             <td>${area.manager.userCode}</td>
+            <td>${area.areaDescription?if_exists}</td>
             <td>
-                <input type="hidden" id="hid_id" value="${area.id}"/>
-                <input type="button" class="btn btn-sm btn-info" id="btn_edit" value="编辑"/>  &nbsp
-                <input type="button" class="btn btn-sm btn-danger" id="btn_delete" value="删除"/>
+                <input type="hidden" id="detail_area_id_${area.id}" value="${area.id}"/>
+                <input type="button" class="btn btn-sm btn-info" name="btn_edit" value="编辑"/>  &nbsp
+                <input type="button" class="btn btn-sm btn-danger" name="btn_delete" value="删除"/>
             </td>
         </tr>
         </#list>
     </#if>
     </tbody>
 </table>
+<script type="application/javascript">
+    $("input[name='btn_edit']").each(function(){
+        $(this).click(function(){
+//            cleanForm();
+            var tds = $(this).parent().prevAll('td');
+            $('#edit_area_code').val($(tds[4]).html());
+            $('#edit_area_name').val($(tds[3]).html());
+            $('#edit_area_parking_capacity').val($(tds[2]).html());
+            $('#edit_manager_id_select').val($(tds[1]).html());
+            $('#edit_area_description').val($(tds[0]).html());
+            $('#editModal').modal('show');
+        });
+    });
+</script>
 <#assign sp=8>
 <#if pageBean?? && pageBean.totalPages gt 1>
 <!-- 分页算法参考新浪博客页面, 保持选中的在中间, 永远有page1 -->

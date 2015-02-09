@@ -58,34 +58,34 @@
                 <h4 class="modal-title" id="editModalLabel">编辑</h4>
             </div>
             <div class="modal-body">
-                <form>
+                <form id="edit_area_form">
+                    <input type="hidden" id="edit_erea_id" name="id"/>
                     <div class="form-group">
                         <label for="edit_area_code" class="control-label">区域编号</label>
-                        <input type="text" class="form-control" id="edit_area_code">
+                        <input type="text" class="form-control" id="edit_area_code" name="areaCode" />
                     </div>
                     <div class="form-group">
                         <label for="edit_area_name" class="control-label">区域名称</label>
-                        <input type="text" class="form-control" id="edit_area_name">
+                        <input type="text" class="form-control" id="edit_area_name" name="areaName">
                     </div>
                     <div class="form-group">
                         <label for="edit_area_parking_capacity" class="control-label">车位数</label>
-                        <input type="text" class="form-control" id="edit_area_parking_capacity">
+                        <input type="text" class="form-control" id="edit_area_parking_capacity" name="areaParkingCapacity">
                     </div>
                     <div class="form-group">
                         <label for="edit_manager_id_select" class="control-label">管理员</label>
-                        <select class="form-control" name="edit_manager_id" id="edit_manager_id_select">
-                            <option value="0">所有</option>
+                        <select class="form-control" name="edit_manager_id" id="edit_manager_id_select" name="areaManagerId">
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="edit_area_description" class="control-label">描述</label>
-                        <textarea class="form-control" id="edit_area_description"></textarea>
+                        <textarea class="form-control" id="edit_area_description" name="areaDescription"></textarea>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary">保存</button>
+                <button type="button" class="btn btn-primary" id="edit_area_save_btn">保存</button>
             </div>
         </div>
     </div>
@@ -97,15 +97,42 @@
 <script type="application/javascript">
 
     var qryAction = "/admin/area/q.do";
+    var saveAction = "/admin/area/save.do";
 
     function goToPage(page) {
         $('#dataShowArea').load(qryAction, $('#qryForm').serialize()+"&page="+page);
+    }
+
+    function cleanForm() {
+        $('#edit_area_code').val('');
+        $('#edit_area_name').val('');
+        $('#edit_area_parking_capacity').val('');
+        $('#edit_manager_id_select').empty();
+        $('#edit_area_description').val('');
     }
 
     $(function(){
         initSelect($("#areaSelect"), '/area/all.json', areaSelectOptionAppend);
         initSelect($("#edit_manager_id_select"), '/user/all.json', userSelectOptionAppend);
         bindQryEvent($('#qrySubmit'), $('#qryForm'), qryAction, $('#dataShowArea'));
+        $('#btn_new').click(function() {
+            cleanForm();
+        });
+        $('#edit_area_save_btn').click(function() {
+            if (checkInput('#edit_area_code', '请输入区域编号!')
+                    && checkInput('#edit_area_name', '请输入区域名称!')
+                    && checkNumberInput('#edit_area_parking_capacity', '请输入车位数!')
+                    && checkInput('#edit_manager_id_select', '请选择管理员!')
+                    && checkInput('#edit_area_description', '请输入区域描述!')) {
+                $.post(saveAction, $('#edit_area_form').serialize(), function(data){
+                    if (data.msg != 'sucess') {
+                        alert('保存失败!');
+                    } else {
+                        alert('保存成功!');
+                    }
+                });
+            }
+        });
     });
 </script>
 <#include "/common/footer.ftl" />
