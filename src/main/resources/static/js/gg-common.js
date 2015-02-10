@@ -50,6 +50,10 @@ function userSelectOptionAppend(user) {
     return "<option value='" + user.userCode +  "'>" + user.username + "</option>";
 }
 
+function userSelectOptionAppendById(user) {
+    return "<option value='" + user.id +  "'>" + user.username + "</option>";
+}
+
 function bindQryEvent(btn, form, action, upgradeDiv) {
     $(btn).click(function(){
         $(upgradeDiv).load(action, $(form).serialize());
@@ -66,11 +70,12 @@ function checkInput(obj, blankErrMsg) {
 }
 function checkNumberInput(obj, blankErrMsg) {
     if (checkInput(obj, blankErrMsg)) {
-        if ($.isNumeric($(obj).var())) {
+        if (!$.isNumeric($(obj).val())) {
             $(obj).focus();
             alert("非法数字!请检查输入!");
             return false;
         }
+        return true;
     }
-    return true;
+    return false;
 }

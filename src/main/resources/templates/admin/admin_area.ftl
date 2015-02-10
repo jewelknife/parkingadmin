@@ -62,19 +62,19 @@
                     <input type="hidden" id="edit_erea_id" name="id"/>
                     <div class="form-group">
                         <label for="edit_area_code" class="control-label">区域编号</label>
-                        <input type="text" class="form-control" id="edit_area_code" name="areaCode" />
+                        <input type="text" class="form-control" id="edit_area_code" name="areaCode"  placeholder="请输入区域编号.."/>
                     </div>
                     <div class="form-group">
                         <label for="edit_area_name" class="control-label">区域名称</label>
-                        <input type="text" class="form-control" id="edit_area_name" name="areaName">
+                        <input type="text" class="form-control" id="edit_area_name" name="areaName"  placeholder="请输入区域名称.."/>
                     </div>
                     <div class="form-group">
                         <label for="edit_area_parking_capacity" class="control-label">车位数</label>
-                        <input type="text" class="form-control" id="edit_area_parking_capacity" name="areaParkingCapacity">
+                        <input type="text" class="form-control" id="edit_area_parking_capacity" name="areaParkingCapacity" placeholder="请输入车位数.." />
                     </div>
                     <div class="form-group">
                         <label for="edit_manager_id_select" class="control-label">管理员</label>
-                        <select class="form-control" name="edit_manager_id" id="edit_manager_id_select" name="areaManagerId">
+                        <select class="form-control"  id="edit_manager_id_select" name="areaManagerId" >
                         </select>
                     </div>
                     <div class="form-group">
@@ -92,7 +92,7 @@
 </div>
 
 <!-- /#page-wrapper -->
-<script src="${contextpath}/js/DataTables/media/js/jquery.dataTables.min.js"></script>
+<script src="${contextpath}/js/datatables/media/js/jquery.dataTables.min.js"></script>
 <script src="${contextpath}/js/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
 <script type="application/javascript">
 
@@ -107,23 +107,34 @@
         $('#edit_area_code').val('');
         $('#edit_area_name').val('');
         $('#edit_area_parking_capacity').val('');
-        $('#edit_manager_id_select').empty();
+        $('#edit_manager_id_select').val('');
         $('#edit_area_description').val('');
+    }
+
+    function areaEdit(obj) {
+        var tds = $(obj).parent().prevAll('td');
+        var prInputs = $(obj).prevAll('input');
+        $("#editModal").modal('show');
+        $("#edit_area_code").attr("value", $(tds[4]).html());
+        $("#edit_area_name").attr("value", $(tds[4]).html());
+        $("#edit_area_parking_capacity").attr("value", $(tds[4]).html());
+        $("#edit_manager_id_select").val($(prInputs[1]).val());
+        $("#edit_area_description").val($(tds[0]).html());
     }
 
     $(function(){
         initSelect($("#areaSelect"), '/area/all.json', areaSelectOptionAppend);
-        initSelect($("#edit_manager_id_select"), '/user/all.json', userSelectOptionAppend);
+        initSelect($("#edit_manager_id_select"), '/user/all.json', userSelectOptionAppendById);
         bindQryEvent($('#qrySubmit'), $('#qryForm'), qryAction, $('#dataShowArea'));
         $('#btn_new').click(function() {
             cleanForm();
         });
         $('#edit_area_save_btn').click(function() {
-            if (checkInput('#edit_area_code', '请输入区域编号!')
-                    && checkInput('#edit_area_name', '请输入区域名称!')
-                    && checkNumberInput('#edit_area_parking_capacity', '请输入车位数!')
-                    && checkInput('#edit_manager_id_select', '请选择管理员!')
-                    && checkInput('#edit_area_description', '请输入区域描述!')) {
+            if (checkInput($('#edit_area_code'), '请输入区域编号!')
+                    && checkInput($('#edit_area_name'), '请输入区域名称!')
+                    && checkNumberInput($('#edit_area_parking_capacity'), '请输入车位数!')
+                    && checkInput($('#edit_manager_id_select'), '请选择管理员!')
+                    && checkInput($('#edit_area_description'), '请输入区域描述!')) {
                 $.post(saveAction, $('#edit_area_form').serialize(), function(data){
                     if (data.msg != 'sucess') {
                         alert('保存失败!');

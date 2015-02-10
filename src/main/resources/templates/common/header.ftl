@@ -132,15 +132,15 @@
                         <form>
                             <div class="form-group">
                                 <label for="edit_area_code" class="control-label">原密码</label>
-                                <input type="password" class="form-control" id="edit_area_code">
+                                <input type="password" class="form-control" >
                             </div>
                             <div class="form-group">
                                 <label for="edit_area_name" class="control-label">新密码</label>
-                                <input type="password" class="form-control" id="edit_area_name">
+                                <input type="password" class="form-control" >
                             </div>
                             <div class="form-group">
                                 <label for="edit_area_parking_capacity" class="control-label">确认新密码</label>
-                                <input type="password" class="form-control" id="edit_area_parking_capacity">
+                                <input type="password" class="form-control" >
                             </div>
                         </form>
                     </div>
