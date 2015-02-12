@@ -2,7 +2,6 @@ package cn.parkingadmin.service;
 
 import cn.parkingadmin.domain.Area;
 import cn.parkingadmin.repository.AreaRepository;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -38,6 +37,11 @@ public class AreaServiceImpl implements AreaService {
     @Override
     public Area save(Area area) {
         return areaRepository.save(area);
+    }
+
+    @Override
+    public Area findOne(Long id) {
+        return areaRepository.findOne(id);
     }
 
     @Override

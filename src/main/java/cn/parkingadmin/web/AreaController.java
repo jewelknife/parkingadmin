@@ -2,6 +2,8 @@ package cn.parkingadmin.web;
 
 import cn.parkingadmin.domain.Area;
 import cn.parkingadmin.service.AreaService;
+import cn.parkingadmin.service.FeesService;
+import cn.parkingadmin.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,6 +35,10 @@ public class AreaController {
 
     @Autowired
     private AreaService areaService;
+    @Autowired
+    private FeesService feesService;
+    @Autowired
+    private UserService userService;
 
     @RequestMapping(value="/area/list", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
@@ -71,32 +78,45 @@ public class AreaController {
 
     @RequestMapping(value="/admin/area/save", method = RequestMethod.POST)
     @ResponseBody
-    public String _new(Area form,Model model) {
+    public ModelMap _save(Area form) {
         Area area = null;
+        boolean isNew = form.getId() == null || form.getId() == 0;
+        ModelMap modelMap = new ModelMap();
         try {
             area = areaService.save(form);
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
         }
         if (area == null) {
-            model.addAttribute("msg", "Save fail!");
+            modelMap.addAttribute("msg", "Save fail!");
         } else {
-            model.addAttribute("msg", "sucess");
+            modelMap.addAttribute("msg", "success");
+            if (isNew) {
+                area.setManager(userService.findOne(area.getManager().getId()));
+            }
+            modelMap.addAttribute("area", area);
         }
-        return null;
+        return modelMap;
     }
 
     @RequestMapping(value="/admin/area/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public String delete(@PathVariable long id, Model model) {
+    public ModelMap delete(@PathVariable long id) {
+        ModelMap modelMap = new ModelMap();
         try {
-            areaService.delete(id);
-            model.addAttribute("msg", "sucess");
+            if (feesService.isFeesInArea(id)) {
+                modelMap.addAttribute("msg", "Save fail! Area id in used.");
+                modelMap.addAttribute("errCode", "WC0022");
+            } else {
+                areaService.delete(id);
+                modelMap.addAttribute("msg", "success");
+            }
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
-            model.addAttribute("msg", "Save fail!");
+            modelMap.addAttribute("msg", "Save fail!");
+            modelMap.addAttribute("errCode", "WC0099");
         }
-        return null;
+        return modelMap;
     }
 
     private Page<Area> getPageBean(String page, Long areaId) {
@@ -104,7 +124,7 @@ public class AreaController {
         if (StringUtils.isNumeric(page) && Integer.parseInt(page) > 0) {
             pageInt = Integer.parseInt(page) - 1;
         }
-        Pageable pageRequest = new PageRequest(pageInt, PAGE_LIMIT, Sort.Direction.DESC, "id");
+        Pageable pageRequest = new PageRequest(pageInt, PAGE_LIMIT, Sort.Direction.ASC, "id");
         return areaService.findList(areaId, pageRequest);
     }
 

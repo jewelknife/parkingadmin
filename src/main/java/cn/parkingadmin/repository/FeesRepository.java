@@ -13,10 +13,10 @@ public interface FeesRepository extends Repository<Fees, Long> {
 
     Page<Fees> findAll(Pageable pageable);
 
-    Page<Fees> findByAreaId(int areaId, Pageable pageable);
+    Page<Fees> findByAreaId(long areaId, Pageable pageable);
 
     Page<Fees> findByUserCode(String userCode, Pageable pageable);
 
-    Page<Fees> findByAreaIdAndUserCode(int areaId, String userCode, Pageable pageable);
+    Page<Fees> findByAreaIdAndUserCode(long areaId, String userCode, Pageable pageable);
 
 }

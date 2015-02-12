@@ -4,6 +4,7 @@ import cn.parkingadmin.domain.Fees;
 import cn.parkingadmin.repository.FeesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ public class FeesServiceImpl implements FeesService {
     private FeesRepository feesRepository;
 
     @Override
-    public Page<Fees> findList(int areaId, String userCode, Pageable pageable) {
+    public Page<Fees> findList(long areaId, String userCode, Pageable pageable) {
         Page<Fees> pageBean = null;
         if (!"all".equalsIgnoreCase(userCode) && areaId > 0) {
             pageBean = feesRepository.findByAreaIdAndUserCode(areaId, userCode, pageable);
@@ -29,5 +30,14 @@ public class FeesServiceImpl implements FeesService {
             pageBean = feesRepository.findAll(pageable);
         }
         return pageBean;
+    }
+
+    @Override
+    public boolean isFeesInArea(long areaId) {
+        Page<Fees> pageBean = feesRepository.findByAreaId(areaId, new PageRequest(1, 1));
+        if (pageBean.getContent().size() > 0) {
+            return true;
+        }
+        return false;
     }
 }

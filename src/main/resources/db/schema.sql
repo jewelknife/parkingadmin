@@ -2,7 +2,7 @@ set names utf8;
 CREATE TABLE areas
 (
   id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  area_code VARCHAR(255) NOT NULL,
+  area_code VARCHAR(255) unique NOT NULL,
   area_name VARCHAR(255) CHARACTER SET utf8 NOT NULL,
   area_parking_capacity TINYINT DEFAULT 0 NOT NULL,
   area_description VARCHAR(255) CHARACTER SET utf8,
@@ -16,7 +16,7 @@ CREATE TABLE areas
 CREATE TABLE users
 (
   id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  user_code VARCHAR(255) NOT NULL,
+  user_code VARCHAR(255) unique NOT NULL,
   user_name VARCHAR(255) CHARACTER SET utf8 NOT NULL,
   user_password VARCHAR(255),
   user_sex enum ('male','famale') not null default 'male',

@@ -18,5 +18,7 @@ public interface AreaService {
 
     Area save(Area area);
 
+    Area findOne(Long id);
+
     void delete(Long id);
 }

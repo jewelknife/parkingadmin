@@ -13,6 +13,8 @@ import java.util.List;
  */
 public interface AreaRepository extends Repository<Area, Long> {
 
+    Area findOne(Long areaId);
+
     List<Area> findAll();
 
     Page<Area> findAll(Pageable pageable);

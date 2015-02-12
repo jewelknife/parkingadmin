@@ -13,7 +13,7 @@ import java.util.Date;
 public class Fees extends AbstractEntity {
 
     @Column(name="area_id", insertable = false, updatable = false)
-    private int areaId;
+    private long areaId;
     @Column(name="user_code")
     private String userCode;
     @Column(name="fee_num")
@@ -32,11 +32,11 @@ public class Fees extends AbstractEntity {
         this.area = area;
     }
 
-    public int getAreaId() {
+    public long getAreaId() {
         return areaId;
     }
 
-    public void setAreaId(int areaId) {
+    public void setAreaId(long areaId) {
         this.areaId = areaId;
     }
 

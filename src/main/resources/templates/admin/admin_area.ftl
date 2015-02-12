@@ -55,11 +55,11 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="editModalLabel">编辑</h4>
+                <h4 class="modal-title" id="editModalLabel"></h4>
             </div>
             <div class="modal-body">
                 <form id="edit_area_form">
-                    <input type="hidden" id="edit_erea_id" name="id"/>
+                    <input type="hidden" id="edit_area_id" name="id"/>
                     <div class="form-group">
                         <label for="edit_area_code" class="control-label">区域编号</label>
                         <input type="text" class="form-control" id="edit_area_code" name="areaCode"  placeholder="请输入区域编号.."/>
@@ -74,7 +74,7 @@
                     </div>
                     <div class="form-group">
                         <label for="edit_manager_id_select" class="control-label">管理员</label>
-                        <select class="form-control"  id="edit_manager_id_select" name="areaManagerId" >
+                        <select class="form-control"  id="edit_manager_id_select" name="manager.id" >
                         </select>
                     </div>
                     <div class="form-group">
@@ -104,6 +104,7 @@
     }
 
     function cleanForm() {
+        $('#edit_area_id').val('');
         $('#edit_area_code').val('');
         $('#edit_area_name').val('');
         $('#edit_area_parking_capacity').val('');
@@ -111,14 +112,38 @@
         $('#edit_area_description').val('');
     }
 
-    function areaEdit(obj) {
+    function del(obj) {
+        var id = $(obj).prevAll('input:eq(2)').val();
+        if (confirm("确定要删除这条记录么?")) {
+            var delAction = "/admin/area/" + id;
+            $.ajax({
+                url: delAction,
+                type: 'DELETE',
+            }).done(function(data) {
+                if (data.msg != 'success') {
+                    if (data.errCode = 'WC0022') {
+                        alert('该区域有关联数据, 无法删除!');
+                    } else {
+                        alert('删除失败!');
+                    }
+                } else {
+                    $("#detail_area_id_" + id).parent().parent().remove();
+                    alert('删除成功!');
+                }
+            });
+        }
+    }
+
+    function edit(obj) {
         var tds = $(obj).parent().prevAll('td');
         var prInputs = $(obj).prevAll('input');
+        $('#editModalLabel').html("编辑区域信息");
         $("#editModal").modal('show');
-        $("#edit_area_code").attr("value", $(tds[4]).html());
-        $("#edit_area_name").attr("value", $(tds[4]).html());
-        $("#edit_area_parking_capacity").attr("value", $(tds[4]).html());
-        $("#edit_manager_id_select").val($(prInputs[1]).val());
+        $('#edit_area_id').val($(prInputs[1]).val());
+        $("#edit_area_code").val($(tds[4]).html());
+        $("#edit_area_name").val($(tds[3]).html());
+        $("#edit_area_parking_capacity").val($(tds[2]).html());
+        $("#edit_manager_id_select").val($(prInputs[0]).val());
         $("#edit_area_description").val($(tds[0]).html());
     }
 
@@ -127,6 +152,7 @@
         initSelect($("#edit_manager_id_select"), '/user/all.json', userSelectOptionAppendById);
         bindQryEvent($('#qrySubmit'), $('#qryForm'), qryAction, $('#dataShowArea'));
         $('#btn_new').click(function() {
+            $('#editModalLabel').html("新增区域信息");
             cleanForm();
         });
         $('#edit_area_save_btn').click(function() {
@@ -136,9 +162,38 @@
                     && checkInput($('#edit_manager_id_select'), '请选择管理员!')
                     && checkInput($('#edit_area_description'), '请输入区域描述!')) {
                 $.post(saveAction, $('#edit_area_form').serialize(), function(data){
-                    if (data.msg != 'sucess') {
+                    if (data.msg != 'success') {
                         alert('保存失败!');
                     } else {
+                        $("#editModal").modal('hide');
+
+                        if ($('#detail_area_id_' + data.area.id).size() > 0) {
+                            var tds = $('#detail_area_id_' + data.area.id).parent().prevAll('td');
+                            $('#detail_area_user_id_' + data.area.id).val(data.area.manager.id);
+                            $(tds[0]).html(data.area.areaDescription);
+                            $(tds[1]).html(data.area.manager.userCode);
+                            $(tds[2]).html(data.area.areaParkingCapacity);
+                            $(tds[3]).html(data.area.areaName);
+                            $(tds[4]).html(data.area.areaCode);
+                        } else {
+                            var editTD = $("<td></td>")
+                                    .append('<input type="hidden" id="detail_area_id_' + data.area.id + '" value="' + data.area.id + '"/>')
+                                    .append('<input type="hidden" id="detail_area_user_id_' + data.area.id + '" value="' + data.area.manager.id + '"/>');
+                            $('<input type="button" class="btn btn-sm btn-info" name="btn_edit" value="编辑"/>').click(function() {
+                                edit(this);
+                            }).css("margin-right", "10px").appendTo(editTD);
+                            $('<input type="button" class="btn btn-sm btn-danger" name="btn_delete" value="删除"/>').click(function() {
+                                del(this);
+                            }).appendTo(editTD);
+                            $("<tr class='odd gradeX'></tr>")
+                                    .append("<td>" + data.area.areaCode + "</td>")
+                                    .append("<td>" + data.area.areaName + "</td>")
+                                    .append("<td>" + data.area.areaParkingCapacity + "</td>")
+                                    .append("<td>" + data.area.manager.userCode + "</td>")
+                                    .append("<td>" + data.area.areaDescription + "</td>")
+                                    .append(editTD)
+                                    .insertAfter($('#dataTables-area tr:last'));
+                        }
                         alert('保存成功!');
                     }
                 });

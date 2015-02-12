@@ -9,6 +9,8 @@ import org.springframework.data.domain.Pageable;
  */
 public interface FeesService {
 
-    Page<Fees> findList(int areaId, String userCode, Pageable pageable);
+    Page<Fees> findList(long areaId, String userCode, Pageable pageable);
+
+    boolean isFeesInArea(long areaId);
 
 }
