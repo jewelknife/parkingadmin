@@ -91,9 +91,7 @@ public class AreaController {
             modelMap.addAttribute("msg", "Save fail!");
         } else {
             modelMap.addAttribute("msg", "success");
-            if (isNew) {
-                area.setManager(userService.findOne(area.getManager().getId()));
-            }
+            area.setManager(userService.findOne(area.getAreaManagerId()));
             modelMap.addAttribute("area", area);
         }
         return modelMap;
@@ -111,6 +109,29 @@ public class AreaController {
                 areaService.delete(id);
                 modelMap.addAttribute("msg", "success");
             }
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            modelMap.addAttribute("msg", "Save fail!");
+            modelMap.addAttribute("errCode", "WC0099");
+        }
+        return modelMap;
+    }
+
+    @RequestMapping(value="/admin/area/del", method = RequestMethod.POST)
+    @ResponseBody
+    public ModelMap delete(@RequestParam(value = "area_checked") long[] ids) {
+        ModelMap modelMap = new ModelMap();
+        try {
+            for (long id : ids) {
+                if (feesService.isFeesInArea(id)) {
+                    modelMap.addAttribute("msg", "Save fail! Area id in used.");
+                    modelMap.addAttribute("errCode", "WC0022");
+                    modelMap.addAttribute("areaId", id);
+                    return modelMap;
+                }
+            }
+            areaService.delete(ids);
+            modelMap.addAttribute("msg", "success");
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
             modelMap.addAttribute("msg", "Save fail!");

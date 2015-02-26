@@ -20,21 +20,21 @@ public class Area extends AbstractEntity {
     private String areaName;
     @Column(name="area_parking_capacity")
     private int areaParkingCapacity;
-//    @Column(name="area_manager_id", insertable = true, updatable = true)
-//    private int areaManagerId;
+    @Column(name="area_manager_id")
+    private long areaManagerId;
     @Column(name="area_description")
     private String areaDescription;
     @ManyToOne
-    @JoinColumn(name="area_manager_id")
+    @JoinColumn(name="area_manager_id", insertable = false, updatable = false)
     private User manager;
 
-//    public int getAreaManagerId() {
-//        return areaManagerId;
-//    }
-//
-//    public void setAreaManagerId(int areaManagerId) {
-//        this.areaManagerId = areaManagerId;
-//    }
+    public long getAreaManagerId() {
+        return areaManagerId;
+    }
+
+    public void setAreaManagerId(long areaManagerId) {
+        this.areaManagerId = areaManagerId;
+    }
 
     public User getManager() {
         return manager;

@@ -19,24 +19,28 @@
                         <div class="panel-body">
                             <div class="dataTable_wrapper">
                                 <div class="row">
-                                    <form class="form-horizontal"  role="form" id="qryForm">
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label">区域:</label>
-                                                <div class="col-sm-10">
-                                                    <select class="form-control" name="area_id" id="areaSelect">
-                                                        <option value="0">所有</option>
-                                                    </select>
+                                    <div class="col-sm-12">
+                                        <form class="form-horizontal"  role="form" id="qryForm">
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">区域:</label>
+                                                    <div class="col-sm-10">
+                                                        <select class="form-control" name="area_id" id="areaSelect">
+                                                            <option value="0">所有</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-sm-4 right">
-                                            <input type="button" class="btn" value="查询" name="submit" id="qrySubmit"/>
-                                        </div>
-                                    </form>
+                                            <div class="col-sm-4 right">
+                                                <input type="button" class="btn" value="查询" name="submit" id="qrySubmit"/>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                                 <div class="row" id="dataShowArea">
+                                    <div class="col-sm-12">
                                     <#include "_list.ftl" />
+                                        </div>
                                 </div>
                             </div>
                             <!-- /.table-responsive -->

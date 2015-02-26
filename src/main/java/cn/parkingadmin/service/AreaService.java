@@ -21,4 +21,6 @@ public interface AreaService {
     Area findOne(Long id);
 
     void delete(Long id);
+
+    void delete(long[] idlist);
 }

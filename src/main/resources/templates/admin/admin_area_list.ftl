@@ -1,6 +1,7 @@
 <table class="table table-striped table-bordered table-hover" id="dataTables-area">
     <thead>
     <tr>
+        <th></th>
         <th>区域编号</th>
         <th>区域名</th>
         <th>车位数</th>
@@ -13,6 +14,7 @@
     <#if pageBean??>
         <#list pageBean.content as area>
         <tr class="odd gradeX">
+            <td><input type="checkbox" name="area_checked" value="${area.id}"></td>
             <td>${area.areaCode}</td>
             <td>${area.areaName}</td>
             <td>${area.areaParkingCapacity}</td>
@@ -20,7 +22,7 @@
             <td>${area.areaDescription?if_exists}</td>
             <td>
                 <input type="hidden" id="detail_area_id_${area.id}" value="${area.id}"/>
-                <input type="hidden" id="detail_area_user_id_${area.id}" value="${area.manager.id}"/>
+                <input type="hidden" id="detail_area_user_id_${area.id}" value="${area.areaManagerId}"/>
                 <input type="button" class="btn btn-sm btn-info" style="margin-right: 10px" name="btn_edit" value="编辑" />
                 <input type="button" class="btn btn-sm btn-danger" name="btn_delete" value="删除"/>
             </td>

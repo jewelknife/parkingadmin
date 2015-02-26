@@ -12,7 +12,7 @@ import java.util.Date;
 @Entity(name="fees")
 public class Fees extends AbstractEntity {
 
-    @Column(name="area_id", insertable = false, updatable = false)
+    @Column(name="area_id")
     private long areaId;
     @Column(name="user_code")
     private String userCode;
@@ -21,7 +21,7 @@ public class Fees extends AbstractEntity {
     @Column(name="fee_date")
     private Date feeDate;
     @ManyToOne
-    @JoinColumn(name="area_id")
+    @JoinColumn(name="area_id", insertable = false, updatable = false)
     private Area area;
 
     public Area getArea() {

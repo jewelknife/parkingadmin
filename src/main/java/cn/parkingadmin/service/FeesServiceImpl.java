@@ -34,7 +34,7 @@ public class FeesServiceImpl implements FeesService {
 
     @Override
     public boolean isFeesInArea(long areaId) {
-        Page<Fees> pageBean = feesRepository.findByAreaId(areaId, new PageRequest(1, 1));
+        Page<Fees> pageBean = feesRepository.findByAreaId(areaId, new PageRequest(0, 1));
         if (pageBean.getContent().size() > 0) {
             return true;
         }
