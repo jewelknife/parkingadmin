@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>停车系统</title>
+    <title>停车管理系统</title>
 
     <link href="${contextpath}/js/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="${contextpath}/js/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
@@ -31,7 +31,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="${contextpath}/index">停车系统</a>
+                <a class="navbar-brand" href="${contextpath}/index">停车管理系统</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -78,21 +78,6 @@
                                 <li>
                                     <a href="#">设备状态</a>
                                 </li>
-                                <#--<li>-->
-                                    <#--<a href="#">三级菜单 <span class="fa arrow"></span></a>-->
-                                    <#--<ul class="nav nav-third-level">-->
-                                        <#--<li>-->
-                                            <#--<a href="#">三级菜单 Item</a>-->
-                                        <#--</li>-->
-                                        <#--<li>-->
-                                            <#--<a href="#">三级菜单 Item</a>-->
-                                        <#--</li>-->
-                                        <#--<li>-->
-                                            <#--<a href="#">三级菜单 Item</a>-->
-                                        <#--</li>-->
-                                    <#--</ul>-->
-                                    <#--<!-- /.nav-third-level &ndash;&gt;-->
-                                <#--</li>-->
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
