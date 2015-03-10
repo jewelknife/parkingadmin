@@ -103,7 +103,7 @@ public class AreaController {
         ModelMap modelMap = new ModelMap();
         try {
             if (feesService.isFeesInArea(id)) {
-                modelMap.addAttribute("msg", "Save fail! Area id in used.");
+                modelMap.addAttribute("msg", "Delete fail! Area id in used.");
                 modelMap.addAttribute("errCode", "WC0022");
             } else {
                 areaService.delete(id);
@@ -124,7 +124,7 @@ public class AreaController {
         try {
             for (long id : ids) {
                 if (feesService.isFeesInArea(id)) {
-                    modelMap.addAttribute("msg", "Save fail! Area id in used.");
+                    modelMap.addAttribute("msg", "Delete fail! Area id in used.");
                     modelMap.addAttribute("errCode", "WC0022");
                     modelMap.addAttribute("areaId", id);
                     return modelMap;
@@ -134,7 +134,7 @@ public class AreaController {
             modelMap.addAttribute("msg", "success");
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
-            modelMap.addAttribute("msg", "Save fail!");
+            modelMap.addAttribute("msg", "Delete fail!");
             modelMap.addAttribute("errCode", "WC0099");
         }
         return modelMap;

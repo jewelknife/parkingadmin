@@ -29,4 +29,5 @@ public interface UserRepository extends Repository<User, Long> {
 
     User findOne(Long id);
 
+    void delete(Long id);
 }

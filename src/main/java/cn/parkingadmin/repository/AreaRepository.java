@@ -1,12 +1,10 @@
 package cn.parkingadmin.repository;
 
 import cn.parkingadmin.domain.Area;
-import cn.parkingadmin.domain.Fees;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.Repository;
 
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -21,6 +19,8 @@ public interface AreaRepository extends Repository<Area, Long> {
     Page<Area> findAll(Pageable pageable);
 
     Page<Area> findById(Long areaId, Pageable pageable);
+
+    Page<Area> findByAreaManagerId(Long areaManagerId, Pageable pageable);
 
     Area save(Area area);
 

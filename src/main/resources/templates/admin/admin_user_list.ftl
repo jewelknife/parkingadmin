@@ -16,7 +16,13 @@
             <td><input type="checkbox" class="checkbox" name="user_checked" value="${user.id}"/></td>
             <td>${user.userCode}</td>
             <td>${user.username}</td>
-            <td></td>
+            <td>
+                <#if user.roles??>
+                    <#list user.roles as role>
+                        ${role.roleName}&nbsp;
+                    </#list>
+                </#if>
+            </td>
             <td>${user.userDescription?if_exists}</td>
             <td>
                 <input type="hidden" id="detail_user_id_${user.id}" value="${user.id}"/>

@@ -2,9 +2,9 @@ package cn.parkingadmin.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.SqlResultSetMapping;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  */
@@ -22,6 +22,20 @@ public class User extends AbstractEntity {
     private String userSex;
     @Column(name = "user_description")
     private String userDescription;
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @JoinTable(name = "user_role",
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName ="id")})
+
+    private List<Role> roles = new ArrayList<Role>();
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
 
     public String getUsername() {
         return username;

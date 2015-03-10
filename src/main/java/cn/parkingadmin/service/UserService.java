@@ -25,4 +25,10 @@ public interface UserService {
 
     User findOne(Long id);
 
+    void delete(Long id);
+
+    void delete(long[] idlist);
+
+    boolean isUserInUse(User user);
+
 }

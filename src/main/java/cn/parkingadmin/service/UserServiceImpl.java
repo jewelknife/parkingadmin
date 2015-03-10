@@ -1,9 +1,12 @@
 package cn.parkingadmin.service;
 
 import cn.parkingadmin.domain.User;
+import cn.parkingadmin.repository.AreaRepository;
+import cn.parkingadmin.repository.FeesRepository;
 import cn.parkingadmin.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +22,18 @@ public class UserServiceImpl implements UserService{
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private AreaRepository areaRepository;
+    @Autowired
+    private FeesRepository feesRepository;
+
+    public void setAreaRepository(AreaRepository areaRepository) {
+        this.areaRepository = areaRepository;
+    }
+
+    public void setFeesRepository(FeesRepository feesRepository) {
+        this.feesRepository = feesRepository;
+    }
 
     public void setUserRepository(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -57,5 +72,29 @@ public class UserServiceImpl implements UserService{
     @Override
     public User findOne(Long id) {
         return userRepository.findOne(id);
+    }
+
+    @Override
+    public void delete(Long id) {
+        userRepository.delete(id);
+    }
+
+    @Override
+    @Transactional
+    public void delete(long[] idlist) {
+        for(Long id : idlist) {
+            userRepository.delete(id);
+        }
+    }
+
+    @Override
+    public boolean isUserInUse(User user) {
+        if (feesRepository.findByUserCode(user.getUserCode(), new PageRequest(0, 1)).getContent().size() > 0) {
+            return true;
+        }
+        if (areaRepository.findByAreaManagerId(user.getId(), new PageRequest(0, 1)).getContent().size() > 0) {
+            return true;
+        }
+        return false;
     }
 }
