@@ -19,7 +19,7 @@ CREATE TABLE users
   user_code VARCHAR(255) unique NOT NULL,
   user_name VARCHAR(255) CHARACTER SET utf8 NOT NULL,
   user_password VARCHAR(255),
-  user_sex enum ('male','famale') not null default 'male',
+  user_sex enum ('male','female') not null default 'male',
   user_description VARCHAR(255) CHARACTER SET utf8 ,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
   PRIMARY KEY (`id`),

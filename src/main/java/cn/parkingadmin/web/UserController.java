@@ -1,5 +1,6 @@
 package cn.parkingadmin.web;
 
+import cn.parkingadmin.domain.Role;
 import cn.parkingadmin.domain.User;
 import cn.parkingadmin.service.UserService;
 import org.apache.commons.lang3.StringUtils;
@@ -44,7 +45,15 @@ public class UserController {
             @RequestParam(defaultValue = "0", required = false) String page
             , ModelMap model) {
         model.put("pageBean", this.getPageBean(page));
+        model.put("roleList", userService.findAllRole());
         return "/admin/user_list";
+    }
+
+    @RequestMapping(value="/admin/user/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public User getOne(
+            @PathVariable long id) {
+        return userService.findOne(id);
     }
 
     @RequestMapping(value="/user/changePasswd", method= RequestMethod.PUT)
@@ -66,7 +75,6 @@ public class UserController {
     @ResponseBody
     public ModelMap _save(User form) {
         User user = null;
-        boolean isNew = form.getId() == null || form.getId() == 0;
         ModelMap modelMap = new ModelMap();
         try {
             user = userService.save(form);
@@ -144,6 +152,12 @@ public class UserController {
     @ResponseBody
     public List<User> userlist() {
         return userService.findAll();
+    }
+
+    @RequestMapping(value="/role/all", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public List<Role> rolelist() {
+        return userService.findAllRole();
     }
 
 }

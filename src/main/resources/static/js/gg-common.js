@@ -79,3 +79,18 @@ function checkNumberInput(obj, blankErrMsg) {
     }
     return false;
 }
+
+function checkRadio(name, blankErrMsg) {
+    var radios = $("input[name='"+ name +"']");
+    if (radios && radios.size() > 0) {
+        for (var i = 0; i < radios.size(); i++) {
+            if ($(radios[i]).attr('checked')) {
+                return true;
+            }
+            radios[0].focus;
+            alert(blankErrMsg);
+            return false;
+        }
+    }
+    return true;
+}

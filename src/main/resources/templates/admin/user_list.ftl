@@ -56,7 +56,7 @@
                     <input type="hidden" id="edit_user_id" name="id"/>
                     <div class="form-group">
                         <label for="edit_user_code" class="control-label">用户工号</label>
-                        <input type="text" class="form-control" id="edit_user_code" name="usercode"  placeholder="请输入用户工号.."/>
+                        <input type="text" class="form-control" id="edit_user_code" name="userCode"  placeholder="请输入用户工号.."/>
                     </div>
                     <div class="form-group">
                         <label for="edit_username" class="control-label">用户名</label>
@@ -64,12 +64,26 @@
                     </div>
                     <div class="form-group">
                         <label for="edit_user_password" class="control-label">密码</label>
-                        <input type="text" class="form-control" id="edit_user_password" name="userPassword" placeholder="请输入密码.." />
+                        <input type="password" class="form-control" id="edit_user_password" name="password" placeholder="请输入密码.." />
                     </div>
                     <div class="form-group">
-                        <label for="edit_user_sex_male" class="control-label">性别</label>
-                        <input type="radio" class="form-control" id="edit_user_sex_male" name="userSex" checked value="男" />
-                        <input type="radio" class="form-control" id="edit_user_sex_female" name="userSex"  value="女" />
+                        <label class="control-label">性别&nbsp;</label>
+                        <label class="radio-inline">
+                            <input type="radio" id="edit_user_sex_male" name="userSex" checked value="male" />男
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio"  id="edit_user_sex_female" name="userSex"  value="female" />女
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">权限&nbsp;</label>
+                        <#if roleList??>
+                            <#list roleList as role>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" id="edit_role_${role.roleName}" name="roles.roleName" value="${role.roleName}" />${role.roleName}
+                                </label>
+                            </#list>
+                        </#if>
                     </div>
                     <div class="form-group">
                         <label for="edit_user_description" class="control-label">描述</label>
@@ -91,7 +105,7 @@
 <script type="application/javascript">
 
     var saveAction = "/admin/user/save.do";
-    var bDelAction = "/admin/user/del.do"
+    var bDelAction = "/admin/user/del.do";
 
     function fleshPage() {
         goToPage(1);
@@ -105,9 +119,15 @@
         $('#edit_user_id').val('');
         $('#edit_user_code').val('');
         $('#edit_username').val('');
-        $('#edit_password').val('');
-        $('#edit_user_sex_male').checked;
+        $('#edit_user_password').val('');
+        $("#edit_user_sex_male").prop("checked",true)
         $('#edit_user_description').val('');
+        var roleInputs = $("input[id='edit_role_*']");
+        if (roleInputs && roleInputs.length > 0) {
+            roleInputs.each(function(){
+                $(this).removeAttr('checked');
+            });
+        }
     }
 
     function del(obj) {
@@ -164,16 +184,30 @@
     }
 
     function edit(obj) {
-        var tds = $(obj).parent().prevAll('td');
-        var prInputs = $(obj).prevAll('input');
-        $('#editModalLabel').html("编辑用户信息");
-        $("#editModal").modal('show');
-        $('#edit_user_id').val($(prInputs[1]).val());
-        $("#edit_user_code").val($(tds[4]).html());
-        $("#edit_username").val($(tds[3]).html());
-        $("#edit_password").val($(tds[2]).html());
-        $("#edit_user_sex_male").val($(prInputs[0]).val());
-        $("#edit_user_description").val($(tds[0]).html());
+        var id = $(obj).prevAll('input:eq(0)').val();
+        $.ajax({
+            url: "/admin/user/" + id,
+            type: 'GET',
+        }).done(function(data) {
+            cleanForm();
+            $('#editModalLabel').html("编辑用户信息");
+            $("#editModal").modal('show');
+            $('#edit_user_id').val(data.id);
+            $("#edit_user_code").val(data.userCode);
+            $("#edit_username").val(data.username);
+            $("#edit_user_password").val('$DDF%#');
+            if (data.userSex == 'male') {
+                $("#edit_user_sex_male").prop("checked",true)
+            } else {
+                $("#edit_user_sex_female").prop("checked",true)
+            }
+            if (data.roles && data.roles.length > 0) {
+                $(data.roles).each(function(){
+                    $('#edit_role_' + this.roleName).prop("checked", "checked");
+                });
+            }
+            $("#edit_user_description").val(data.userDescription);
+        });
     }
 
     $(function(){
@@ -187,7 +221,8 @@
         $('#edit_user_save_btn').click(function() {
             if (checkInput($('#edit_user_code'), '请输入用户工号!')
                     && checkInput($('#edit_username'), '请输入用户名!')
-                    && checkNumberInput($('#edit_password'), '请输入用户密码!')
+                    && checkInput($('#edit_user_password'), '请输入用户密码!')
+                    && checkRadio('userSex', '请选择用户性别')
                     && checkInput($('#edit_user_description'), '请输入区域描述!')) {
                 $.post(saveAction, $('#edit_user_form').serialize(), function(data){
                     if (data.msg != 'success') {

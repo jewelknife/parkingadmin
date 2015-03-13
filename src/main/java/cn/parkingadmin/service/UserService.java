@@ -1,5 +1,6 @@
 package cn.parkingadmin.service;
 
+import cn.parkingadmin.domain.Role;
 import cn.parkingadmin.domain.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,6 +15,8 @@ public interface UserService {
     Page<User> findAll(Pageable pageable);
 
     List<User> findAll();
+
+    List<Role> findAllRole();
 
     User findByUsername(String username);
 

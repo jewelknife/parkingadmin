@@ -1,4 +1,4 @@
-<table class="table table-striped table-bordered table-hover" id="dataTables-area">
+<table class="table table-striped table-bordered table-hover" id="dataTables-user">
     <thead>
     <tr>
         <th></th>
@@ -19,7 +19,7 @@
             <td>
                 <#if user.roles??>
                     <#list user.roles as role>
-                        ${role.roleName}&nbsp;
+                        ${role.roleName}<#if role_has_next>,</#if>
                     </#list>
                 </#if>
             </td>
@@ -36,12 +36,12 @@
 </table>
 <script type="application/javascript">
     $(function () {
-        $("#dataTables-area input[name='btn_edit']").each(function () {
+        $("#dataTables-user input[name='btn_edit']").each(function () {
             $(this).click(function () {
                 edit(this);
             });
         });
-        $("#dataTables-area input[name='btn_delete']").each(function () {
+        $("#dataTables-user input[name='btn_delete']").each(function () {
             $(this).click(function () {
                 del(this)
             });

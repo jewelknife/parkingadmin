@@ -1,8 +1,10 @@
 package cn.parkingadmin.service;
 
+import cn.parkingadmin.domain.Role;
 import cn.parkingadmin.domain.User;
 import cn.parkingadmin.repository.AreaRepository;
 import cn.parkingadmin.repository.FeesRepository;
+import cn.parkingadmin.repository.RoleRepository;
 import cn.parkingadmin.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -26,6 +28,8 @@ public class UserServiceImpl implements UserService{
     private AreaRepository areaRepository;
     @Autowired
     private FeesRepository feesRepository;
+    @Autowired
+    private RoleRepository roleRepository;
 
     public void setAreaRepository(AreaRepository areaRepository) {
         this.areaRepository = areaRepository;
@@ -47,6 +51,11 @@ public class UserServiceImpl implements UserService{
     @Override
     public List<User> findAll() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public List<Role> findAllRole() {
+        return roleRepository.findAll();
     }
 
     @Override
