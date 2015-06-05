@@ -1,7 +1,3 @@
-/*
- *  @(#)Area.java    1.3 1/30/15
- *  Copyright © 2014 Vobile, Inc. All rights reserved.
- */
 package cn.parkingadmin.domain;
 
 import javax.persistence.Column;
@@ -10,6 +6,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 /**
+ *  By jewelknife
+ *
  */
 @Entity(name="areas")
 public class Area extends AbstractEntity {

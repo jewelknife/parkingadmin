@@ -6,8 +6,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- */
+
 @Entity(name = "users")
 public class User extends AbstractEntity {
 

@@ -1,7 +1,3 @@
-/*
- *  @(#)HomeController.java    1.3 1/21/15
- *  Copyright © 2014 Vobile, Inc. All rights reserved.
- */
 package cn.parkingadmin.web;
 
 
